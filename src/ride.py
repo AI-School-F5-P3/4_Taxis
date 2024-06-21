@@ -20,9 +20,25 @@ class Ride:
         self.last_change = 0
 
 
-    # Método para iniciar Carrera (que incluye que el programa se mantenga a la espera)
+    # Método para iniciar Carrera (que incluye que el programa se mantenga a la espera     
+
     def start(self):
-        pass
+        print("Empieza la carrera y empieza a contar el taximetro")
+
+        print("self.in_ride", self.in_ride)
+
+        if not self.in_ride:
+            self.in_ride = True
+            self.in_movement = False
+            self.time_stopped = 0 # Tiempo parado
+            self.time_in_movement = 0 # Tiempo en movimiento
+            self.start_ride = time.time()
+            self.last_change = time.time()
+            print("Ride started. Taxi is stopped.")
+            print(f"self.in_ride. Taximetro corriendo a {self.fare.stop_fare}", self.in_ride)
+        else:
+            print("The ride has already started.")
+
 
 
     # Método Movimiento del Taxi (Parado/Movimiento) Cambiar los estados de parado o movimiento

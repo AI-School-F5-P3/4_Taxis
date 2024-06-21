@@ -21,38 +21,16 @@ class Ride:
 
     # Método para iniciar Carrera (que incluye que el programa se mantenga a la espera)
     def start(self):
-        self.in_ride = True #Inicia la carrera
-        self.time_start = time.time()  # Registra el tiempo de inicio de la carrera
-
+        pass
 
     # Método Movimiento del Taxi (Parado/Movimiento) Cambiar los estados de parado o movimiento
     def change_state(self):
-        if self.in_ride:
-            current_time = time.time()
-            if self.in_movement:  # Si el taxi está en movimiento
-                self.time_in_movement += current_time - self.last_change  # Acumula el tiempo en movimiento
-            else:
-                self.time_stopped += current_time - self.last_change  # Acumula el tiempo parado
-            self.in_movement = not self.in_movement  # Cambia el estado del taxi
-            self.last_change = current_time  # Actualiza el momento del último cambio
+        pass
 
     # Método para finalizar la carrera
     def finish_ride(self):
-        if self.in_ride:
-            self.calculate_cost()  # Calcula el costo total de la carrera
-            self.in_ride = False  # Finaliza la carrera
-            return self.fare.total_cost  # Retorna el costo total de la carrera
-        else:
-            return 0  # Si la carrera no ha empezado, retorna 0
-
+        pass
     
     # Método para calcular el precio de la carrera
     def calculate_cost(self):
-        if self.time_start and self.last_change:
-            elapsed_time = time.time() - self.time_start  # Calcula el tiempo transcurrido
-            if self.in_movement:
-                self.time_in_movement += time.time() - self.last_change  # Acumula el tiempo en movimiento
-            else:
-                self.time_stopped += time.time() - self.last_change  # Acumula el tiempo parado
-            
-            self.fare.calculate_total_cost(self.time_stopped, self.time_in_movement)  # Calcula el costo total de la carrera
+        pass

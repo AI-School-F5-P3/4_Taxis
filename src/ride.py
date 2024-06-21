@@ -1,4 +1,5 @@
 from fare import Fare
+from time import time
 
 # Creamos la clase Carrera en la que se desarrollara la funcionalidad de todo el movimiento del Taxi
 class Ride:
@@ -34,9 +35,20 @@ class Ride:
 
     # Método para finalizar la carrera
     def finish_ride(self):
-        pass
+         if self.in_ride:
+            self.in_ride = False  # Finaliza la carrera
+            total_cost =  self.calculate_cost() # Calcula el costo total de la carrera
+            taxi_emoji = "\U0001F695"
+            print(f"{taxi_emoji} Finalizamos carrera. Coste total {round(total_cost, 2)}€")
+            # return self.fare.total_cost  # Retorna el costo total de la carrera
+            
+         else:
+            print("No estamos en carrera")
+            return 0  # Si la carrera no ha empezado, retorna 0
 
-    
+
     # Método para calcular el precio de la carrera
     def calculate_cost(self):
-        pass
+        stop_cost = self.time_stopped * self.fare.stop_fare
+        movement_cost = self.time_in_movement * self.fare.movement_fare
+        return stop_cost + movement_cost

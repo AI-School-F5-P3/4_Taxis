@@ -13,8 +13,12 @@ class Taximeter:
     def command_menu(self):
         pass
         
+    # Method to start a new ride
+    def startride(self):
+        self.ride.start()
 
     # Method to finish the ride and show the total fare
     def end_ride(self):
         print("entrando en finish ride")
         self.ride.finish_ride()
+

@@ -34,24 +34,19 @@ class Ride:
 
 
     # Método para finalizar la carrera
-    def finish(self):
-        if self.in_ride:
-            current_time = time.time()
-            if self.in_movement:
-                self.time_in_movement += current_time - self.last_change
-            else:
-                self.time_stopped += current_time - self.last_change
+    def finish_ride(self):
+         if self.in_ride:
+            self.in_ride = False  # Finaliza la carrera
+            total_cost =  self.calculate_cost() # Calcula el costo total de la carrera
+            taxi_emoji = "\U0001F695"
+            print(f"{taxi_emoji} Finalizamos carrera. Coste total {round(total_cost, 2)}€")
+            # return self.fare.total_cost  # Retorna el costo total de la carrera
             
-            self.in_ride = False
-            total_cost = self.calculate_cost()
-            print(f"Ride finished. Total cost: {total_cost:.2f} Euros.")
-            return total_cost
-        else:
-            print("The ride has not started.")
-            return 0.0
+         else:
+            print("No estamos en carrera")
+            return 0  # Si la carrera no ha empezado, retorna 0
 
 
-    
     # Método para calcular el precio de la carrera
     def calculate_cost(self):
         stop_cost = self.time_stopped * self.fare.stop_fare

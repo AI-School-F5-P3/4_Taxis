@@ -14,7 +14,7 @@ class Taximeter:
         pass
         
 
-
-
-# Espacio para crear Instancia de nuevo Taximetro y llamada a métodos (menu...)
-# Hola Mundo
+    # Method to finish the ride and show the total fare
+    def end_ride(self):
+        print("entrando en finish ride")
+        self.ride.finish_ride()

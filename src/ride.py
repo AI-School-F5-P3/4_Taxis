@@ -1,5 +1,5 @@
+import time #Importamos el modulo time para trabajar con tiempo
 from fare import Fare
-import time
 
 # Creamos la clase Carrera en la que se desarrollara la funcionalidad de todo el movimiento del Taxi
 class Ride:
@@ -38,8 +38,6 @@ class Ride:
             print(f"self.in_ride. Taximetro corriendo a {self.fare.stop_fare}", self.in_ride)
         else:
             print("The ride has already started.")
-
-
 
     # Método Movimiento del Taxi (Parado/Movimiento) Cambiar los estados de parado o movimiento
     def change_state(self, movement):
@@ -80,7 +78,6 @@ class Ride:
          else:
             print("No estamos en carrera")
             return 0  # Si la carrera no ha empezado, retorna 0
-
 
     # Método para calcular el precio de la carrera
     def calculate_cost(self):

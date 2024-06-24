@@ -42,9 +42,28 @@ class Ride:
 
 
     # Método Movimiento del Taxi (Parado/Movimiento) Cambiar los estados de parado o movimiento
-    def change_state(self):
-        pass
-
+    def change_state(self, movement):
+        if self.in_ride: # Si esta en carrera
+            current_time = time.time() # para que guarde en que segundo ha cambiado de estado
+            if movement: # Le hemos dado a (m)
+                if self.in_movement == False:  # Si estaba parado de antes
+                    self.time_stopped = self.time_stopped + (current_time - self.last_change) # Guarda el tiempo que ha estado parado
+                    self.in_movement = True # Si no habia movimiento cambiamelo a True
+                    self.last_change = current_time
+                    print("Taxi in movement.")
+                else:
+                    print("El taxi ya estaba en movimiento")
+            else: # Le hemos dado a (s)
+                print("movement - False", movement)
+                if self.in_movement:
+                    self.time_in_movement += current_time - self.last_change
+                    self.in_movement = False
+                    self.last_change = current_time
+                    print("Taxi stopped.")
+                else:
+                    print("El taxi ya estaba parado")
+        else:
+            print("The ride has not started.") # Para controlar que no se mueve o se para sin haber iniciado la carrera    
     
     # OPCIONAL MÉTODOS PARA STOP, SEMÁFORO Y ATASCO
 

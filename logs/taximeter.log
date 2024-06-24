@@ -1,0 +1,42 @@
+2024-06-24 15:22:02,326 - Taximeter - INFO - Mostrando el men� de comandos
+2024-06-24 15:22:12,142 - Ride - ERROR - Attempt to change state when ride has not started.
+2024-06-24 15:22:16,259 - Ride - INFO - Ride started. Taxi is stopped.
+2024-06-24 15:22:19,773 - Ride - WARNING - Attempt to stop taxi when it is already stopped.
+2024-06-24 15:22:23,332 - Ride - INFO - Taxi in movement.
+2024-06-24 15:22:25,388 - Ride - INFO - Taxi stopped.
+2024-06-24 15:22:27,314 - Ride - INFO - Taxi in movement.
+2024-06-24 15:22:28,987 - Ride - DEBUG - Calculating cost: stop_cost=0.17998310565948486, movement_cost=0.10278236865997314
+2024-06-24 15:22:28,987 - Ride - INFO - Ride finished. Total cost: 0.28�
+2024-06-24 15:22:36,746 - Ride - ERROR - Attempt to change state when ride has not started.
+2024-06-24 15:22:40,184 - Ride - INFO - Ride started. Taxi is stopped.
+2024-06-24 15:22:43,809 - Ride - INFO - Taxi in movement.
+2024-06-24 15:22:45,577 - Ride - INFO - Taxi stopped.
+2024-06-24 15:22:46,756 - Ride - INFO - Taxi in movement.
+2024-06-24 15:22:49,472 - Ride - INFO - Taxi stopped.
+2024-06-24 15:22:52,026 - Ride - DEBUG - Calculating cost: stop_cost=0.09609175682067872, movement_cost=0.22415964603424074
+2024-06-24 15:22:52,026 - Ride - INFO - Ride finished. Total cost: 0.32�
+2024-06-24 15:22:54,571 - Taximeter - INFO - Exiting the system.
+2024-06-24 15:30:50,322 - Taximeter - INFO - Mostrando el men� de comandos
+2024-06-24 15:30:58,540 - Taximeter - INFO - Exiting the system.
+2024-06-24 15:32:21,435 - Taximeter - INFO - Mostrando el men� de comandos
+2024-06-24 15:32:24,867 - Ride - INFO - Ride started. Taxi is stopped.
+2024-06-24 15:32:27,464 - Ride - INFO - Taxi in movement.
+2024-06-24 15:32:33,200 - Ride - INFO - Taxi stopped.
+2024-06-24 15:32:37,619 - Ride - INFO - Taxi in movement.
+2024-06-24 15:32:43,859 - Ride - INFO - Taxi stopped.
+2024-06-24 15:32:49,750 - Ride - INFO - Taxi in movement.
+2024-06-24 15:32:53,400 - Ride - DEBUG - Calculating cost: stop_cost=0.2581457996368408, movement_cost=0.5988015770912171
+2024-06-24 15:32:53,400 - Ride - INFO - Ride finished. Total cost: 0.86�
+2024-06-24 15:33:16,376 - Taximeter - INFO - Exiting the system.
+2024-06-24 15:40:39,694 - Taximeter - INFO - Mostrando el men� de comandos
+2024-06-24 15:40:42,552 - Ride - INFO - Ride started. Taxi is stopped.
+2024-06-24 15:40:46,042 - Ride - INFO - Taxi in movement.
+2024-06-24 15:40:50,235 - Ride - DEBUG - Calculating cost: stop_cost=0.06979518890380859, movement_cost=0.0
+2024-06-24 15:40:50,235 - Ride - INFO - Ride finished. Total cost: 0.07�
+2024-06-24 15:40:59,628 - Taximeter - INFO - Exiting the system.
+2024-06-24 15:43:16,946 - Taximeter - INFO - Mostrando el men� de comandos
+2024-06-24 15:43:19,704 - Ride - INFO - Ride started. Taxi is stopped.
+2024-06-24 15:43:25,961 - Ride - INFO - Taxi in movement.
+2024-06-24 15:43:32,004 - Ride - DEBUG - Calculating cost: stop_cost=0.12515225887298584, movement_cost=0.0
+2024-06-24 15:43:32,005 - Ride - INFO - Ride finished. Total cost: 0.13�
+2024-06-24 15:43:59,904 - Taximeter - INFO - Exiting the system.

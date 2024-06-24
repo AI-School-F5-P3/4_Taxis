@@ -16,7 +16,12 @@ class Taximeter:
     # Method to start a new ride
     def startride(self):
         self.ride.start()
-
+        
+    # Method to change the state of the taxi (moving or stopped)
+    def change_state(self, movement):
+        print("status - ", movement), 
+        self.ride.change_state(movement)
+         
     # Method to finish the ride and show the total fare
     def end_ride(self):
         print("entrando en finish ride")

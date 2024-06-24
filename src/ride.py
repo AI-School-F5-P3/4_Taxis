@@ -1,5 +1,5 @@
 from fare import Fare
-from time import time
+import time
 
 # Creamos la clase Carrera en la que se desarrollara la funcionalidad de todo el movimiento del Taxi
 class Ride:

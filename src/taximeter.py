@@ -20,7 +20,7 @@ class Taximeter:
         print("  'e' - Exit the system")
         
     # Method to start a new ride
-    def startride(self):
+    def start_ride(self):
         self.ride.start()
         
     # Method to change the state of the taxi (moving or stopped)

@@ -1,19 +1,17 @@
 from fare import Fare
 import time
 
-# Colores y estilos
+# Definición de colores, estilos e iconos
 GREEN = "\033[32m"
 MAGENTA = "\033[35m"
 RESET = "\033[0m"
 CYAN = "\033[36m"
 YELLOW = "\033[33m"
 RED = "\033[31m"
-
 DESTINATION_FLAG = "\U0001F3C1"  # 🏁
 GREEN_CIRCLE = "\U0001F7E2"  # 🟢
 RED_CIRCLE = "\U0001F534"    # 🔴
 LOCATION_MARKER = "\U0001F4CD"   # 📍
-
 CRY = "\U0001F622"       # 😢
 
 

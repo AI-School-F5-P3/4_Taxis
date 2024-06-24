@@ -1,6 +1,21 @@
 import time #Importamos el modulo time para trabajar con tiempo
 from fare import Fare
 
+# Definición de colores, estilos e iconos
+GREEN = "\033[32m"
+MAGENTA = "\033[35m"
+RESET = "\033[0m"
+CYAN = "\033[36m"
+YELLOW = "\033[33m"
+RED = "\033[31m"
+DESTINATION_FLAG = "\U0001F3C1"  # 🏁
+GREEN_CIRCLE = "\U0001F7E2"  # 🟢
+RED_CIRCLE = "\U0001F534"    # 🔴
+LOCATION_MARKER = "\U0001F4CD"   # 📍
+CRY = "\U0001F622"       # 😢
+
+
+
 # Creamos la clase Carrera en la que se desarrollara la funcionalidad de todo el movimiento del Taxi
 class Ride:
     # Constructor que recibirá el parámetro fare (stop_fare y movement_fare) cuando se instancie en la clase Taximetro
@@ -23,10 +38,6 @@ class Ride:
     # Método para iniciar Carrera (que incluye que el programa se mantenga a la espera     
 
     def start(self):
-        print("Empieza la carrera y empieza a contar el taximetro")
-
-        print("self.in_ride", self.in_ride)
-
         if not self.in_ride:
             self.in_ride = True
             self.in_movement = False
@@ -34,10 +45,9 @@ class Ride:
             self.time_in_movement = 0 # Tiempo en movimiento
             self.start_ride = time.time()
             self.last_change = time.time()
-            print("Ride started. Taxi is stopped.")
-            print(f"self.in_ride. Taximetro corriendo a {self.fare.stop_fare}", self.in_ride)
+            print(f"\n{CYAN}| {DESTINATION_FLAG} - Empieza la carrera | {RESET} El taxi esta detenido. Taxímetro corriendo a {self.fare.stop_fare}€ por segundo.\n")
         else:
-            print("The ride has already started.")
+            print(f"\n{CYAN}| {DESTINATION_FLAG} - El viaje ya había comenzado... ¿Qué hacemos ahora? | {RESET} El taxi esta detenido. Taxímetro corriendo a {self.fare.stop_fare}€ por segundo.\n")
 
     # Método Movimiento del Taxi (Parado/Movimiento) Cambiar los estados de parado o movimiento
     def change_state(self, movement):
@@ -48,20 +58,21 @@ class Ride:
                     self.time_stopped = self.time_stopped + (current_time - self.last_change) # Guarda el tiempo que ha estado parado
                     self.in_movement = True # Si no habia movimiento cambiamelo a True
                     self.last_change = current_time
-                    print("Taxi in movement.")
+                    print(f"\n{GREEN}| {GREEN_CIRCLE} - ¡Vámonos! | {RESET} El taxi está en movimiento. Taxímetro corriendo a {self.fare.movement_fare}€ por segundo.\n")
                 else:
-                    print("El taxi ya estaba en movimiento")
+                    print(f"\n{GREEN}| {GREEN_CIRCLE} - El taxi ya estaba en movimiento... ¿Qué hacemos ahora? | {RESET} Seguimos en marcha. Taxímetro corriendo a {self.fare.movement_fare}€ por segundo.\n")
             else: # Le hemos dado a (s)
-                print("movement - False", movement)
+
                 if self.in_movement:
                     self.time_in_movement += current_time - self.last_change
                     self.in_movement = False
                     self.last_change = current_time
-                    print("Taxi stopped.")
+                    print(f"\n{RED}| {RED_CIRCLE} - Nos detenemos | {RESET} El taxi está parado. Taxímetro corriendo a {self.fare.stop_fare}€ por segundo.\n")
                 else:
-                    print("El taxi ya estaba parado")
+                    print(f"\n{RED}| {RED_CIRCLE} - El taxi ya estaba parado... ¿Qué hacemos ahora? | {RESET} Seguimos parados. Taxímetro corriendo a {self.fare.stop_fare}€ por segundo.\n")
+
         else:
-            print("The ride has not started.") # Para controlar que no se mueve o se para sin haber iniciado la carrera    
+            print(f"\n{RED}| {CRY} - El viaje aún no se ha iniciado | {RESET} \n") # Para controlar que no se mueve o se para sin haber iniciado la carrera
     
     # OPCIONAL MÉTODOS PARA STOP, SEMÁFORO Y ATASCO
 
@@ -73,10 +84,11 @@ class Ride:
             total_cost =  self.calculate_cost() # Calcula el costo total de la carrera
             taxi_emoji = "\U0001F695"
             print(f"{taxi_emoji} Finalizamos carrera. Coste total {round(total_cost, 2)}€")
+            print(f"\n{MAGENTA}| {LOCATION_MARKER} - Ha llegado a su destino | {RESET} Finalizamos carrera. Coste total {round(total_cost, 2)}€\n")
             # return self.fare.total_cost  # Retorna el costo total de la carrera
             
          else:
-            print("No estamos en carrera")
+            print(f"\n{MAGENTA}| {CRY} - No estamos en carrera | {RESET} \n")
             return 0  # Si la carrera no ha empezado, retorna 0
 
     # Método para calcular el precio de la carrera

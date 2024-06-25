@@ -10,13 +10,13 @@ Tras un exhaustivo análisis, se identificó que una de las principales causas d
 
 El objetivo principal de este proyecto es modernizar el sistema de facturación existente y crear una solución eficiente y precisa para el cálculo de tarifas. Con esta modernización, buscamos no solo mejorar la experiencia del cliente, sino también optimizar el servicio y hacerlo más competitivo frente a las alternativas disponibles en el mercado.
 
-Objetivos del Proyecto
+**Objetivos del Proyecto**
 
-Proveer una solución eficiente para la gestión de carreras de taxis.
+- Proveer una solución eficiente para la gestión de carreras de taxis.
 
-Facilitar el cálculo de tarifas en tiempo real.
+- Facilitar el cálculo de tarifas en tiempo real.
 
-Proporcionar una interfaz amigable para los conductores y usuarios.
+- Proporcionar una interfaz amigable para los conductores y usuarios.
 
 Este proyecto representa un paso significativo hacia la modernización del servicio de taxis, asegurando que se mantenga relevante y competitivo en el entorno actual de transporte. 
 

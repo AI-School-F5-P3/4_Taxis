@@ -3,3 +3,8 @@
 2024-06-25 13:57:30,953 - Taximeter - INFO - Mostrando el menú de comandos
 2024-06-25 13:58:11,072 - Ride - ERROR - Attempt to change state when ride has not started.
 2024-06-25 13:58:13,246 - Taximeter - INFO - Exiting the system.
+2024-06-25 14:30:04,147 - Taximeter - INFO - Mostrando el menú de comandos
+2024-06-25 14:30:10,372 - Ride - INFO - Ride started. Taxi is stopped.
+2024-06-25 14:30:14,041 - Ride - WARNING - Attempt to stop taxi when it is already stopped.
+2024-06-25 14:30:17,610 - Ride - WARNING - Attempt to stop taxi when it is already stopped.
+2024-06-25 14:30:19,327 - Taximeter - INFO - Exiting the system.

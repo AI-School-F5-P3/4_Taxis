@@ -142,6 +142,7 @@ def main():
                 break
             else:
                 print("Contraseña incorrecta, por favor inténtelo de nuevo")
+    taximeter.command_menu()
     while True:
         command = input(f"Ingrese un comando:").strip().lower()
         if command == "i":

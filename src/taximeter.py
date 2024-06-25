@@ -64,7 +64,7 @@ class Taximeter:
 
     def check_password(self, user_password):
         if user_password.lower() == self.correct_password.lower():
-            print(f"{CELEBRATION}Acceso concedido{CELEBRATION}")
+            print(f"{CELEBRATION} Acceso concedido {CELEBRATION}")
             return True
         else:
             print(f"Contraseña incorrecta. La contraseña ingresada fue:'{user_password}'")

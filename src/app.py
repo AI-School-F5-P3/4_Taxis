@@ -24,20 +24,69 @@ SMILE = "\U0001F600"     # 😀
 THINKING = "\U0001F914"  # 🤔
 CRY = "\U0001F622"       # 😢
 RAISED_HAND = "\U0000270B"  # ✋
+MONEY_BAG = "\U0001F4B0"      # 💰 
+DOLLAR_BILL = "\U0001F4B5"    # 💵
 
 
 class App(ttk.Frame):
 
     def __init__(self, master):
         super().__init__(master)
-        self.pack(fill=BOTH, expand=YES)     
+        self.pack(fill=BOTH, expand=YES)
+        
+        self.taximeter = Taximeter()  # Instanciar la clase Taximeter
+        
+        self.create_password_interface()
 
+    def create_password_interface(self):
+        """Crear la interfaz de autenticación"""
+        
+        self.create_image()
+        self.password_frame = ttk.Frame(self, padding=50)
+        self.password_frame.pack(expand=True)
+        
+        password_label = ttk.Label(self.password_frame, text="Contraseña", font=("Helvetica", 10))
+        password_label.pack(pady=10)
+
+        self.password_entry = ttk.Entry(self.password_frame, show="*", width=20, font=("Helvetica", 12))
+        self.password_entry.pack(pady=10)
+        
+        button_frame = ttk.Frame(self.password_frame)
+        button_frame.pack(pady=15)
+        
+        # cancel_button = ttk.Button(button_frame, text="Cancelar", bootstyle=SECONDARY, command=self.exit_button_click, width=15)
+        cancel_button = ttk.Button(
+            button_frame, 
+            text="Cancelar", 
+            bootstyle=SECONDARY, 
+            command=self.exit_button_click, 
+            width=11,
+            padding=(10, 5),
+        )
+        cancel_button.pack(side=LEFT, padx=5)
+
+
+
+        submit_button = ttk.Button(button_frame, text="Enviar", bootstyle=SUCCESS, command=self.check_password,width=11,padding=(10, 5))
+        submit_button.pack(side=LEFT, padx=5)
+
+        
+
+    def check_password(self):
+        """Verificar la contraseña ingresada"""
+        if self.taximeter.check_password(self.password_entry.get()):
+            self.password_frame.pack_forget()  # Ocultar el frame de la contraseña
+            self.create_main_interface()  # Crear la interfaz principal
+        else:
+            error_label = ttk.Label(self.password_frame, text="Contraseña incorrecta", font=("Helvetica", 12), foreground="red")
+            error_label.pack(pady=10)
+            
+    def create_main_interface(self):
+        """Crear la interfaz principal de la aplicación"""
         self.create_header()
         self.create_image()
         self.create_message_area()
         self.create_buttonbox()
-        
-        self.taximeter = Taximeter()  # Instanciar la clase Taximeter
 
     def create_header(self):
         """El encabezado de la aplicación"""
@@ -103,22 +152,22 @@ class App(ttk.Frame):
         
     def start_button_click(self):
 
-            self.start_btn.config(bootstyle="SUCCESS")  # Cambia el estilo del botón a verde
-            self.pause_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a verde
-            self.move_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
-            self.stop_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
+        self.start_btn.config(bootstyle="SUCCESS")  # Cambia el estilo del botón a verde
+        self.pause_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a verde
+        self.move_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
+        self.stop_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
 
-            if self.taximeter.ride.in_ride:
-                if self.taximeter.ride.in_movement:
-                    self.console_label.config(text=f"Ya estamos en carrera.\n\nTaxímetro corriendo a {self.taximeter.fare.movement_fare}€ por segundo.",bootstyle=(INFO, INVERSE))
-                else:
-                    self.console_label.config(text=f"Ya estamos en carrera.\n\nTaxímetro corriendo a {self.taximeter.fare.stop_fare}€ por segundo.",bootstyle=(INFO, INVERSE))
+        if self.taximeter.ride.in_ride:
+            if self.taximeter.ride.in_movement:
+                self.console_label.config(text=f"Ya estamos en carrera.\n\nTaxímetro corriendo a {self.taximeter.fare.movement_fare}€ por segundo.", bootstyle=(INFO, INVERSE))
             else:
-                self.console_label.config(text=f"¡Hola! El taxi esta detenido.\n\nTaxímetro corriendo a {self.taximeter.fare.stop_fare}€ por segundo.",bootstyle=(INFO, INVERSE))
-                self.taximeter.start_ride()  # Llama a start_ride
+                self.console_label.config(text=f"Ya estamos en carrera.\n\nTaxímetro corriendo a {self.taximeter.fare.stop_fare}€ por segundo.", bootstyle=(INFO, INVERSE))
+        else:
+            self.console_label.config(text=f"¡Hola! El taxi esta detenido.\n\nTaxímetro corriendo a {self.taximeter.fare.stop_fare}€ por segundo.", bootstyle=(INFO, INVERSE))
+            self.taximeter.start_ride()  # Llama a start_ride
     
     def play_button_click(self):
-        if self.taximeter.ride.in_ride: # Si esta en carrera
+        if self.taximeter.ride.in_ride:  # Si está en carrera
             self.pause_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a verde
             self.move_btn.config(bootstyle="SUCCESS")  # Cambia el estilo del botón a oscuro
             self.start_btn.config(bootstyle="WARNING")  # Cambia el estilo del botón a amarillo
@@ -131,11 +180,10 @@ class App(ttk.Frame):
             
             self.taximeter.change_state(True)  # Llama a change_state
         else:
-            self.console_label.config(text=f"\nEl viaje aún no se ha iniciado, llame a un taxi {RAISED_HAND}\n",bootstyle=(DANGER, INVERSE)) # Para controlar que no se mueve o se para sin haber iniciado la carrera
-        
+            self.console_label.config(text=f"\nEl viaje aún no se ha iniciado, llame a un taxi {RAISED_HAND}\n", bootstyle=(DANGER, INVERSE))  # Para controlar que no se mueve o se para sin haber iniciado la carrera
         
     def pause_button_click(self):      
-        if self.taximeter.ride.in_ride: # Si esta en carrera
+        if self.taximeter.ride.in_ride:  # Si está en carrera
             self.pause_btn.config(bootstyle="SUCCESS")  # Cambia el estilo del botón a verde
             self.move_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
             self.start_btn.config(bootstyle="WARNING")  # Cambia el estilo del botón a amarillo
@@ -147,8 +195,7 @@ class App(ttk.Frame):
                 self.console_label.config(text=f"El taxi ya está parado... ¿Qué hacemos ahora?\n\nTaxímetro corriendo a {self.taximeter.fare.stop_fare}€ por segundo.")
             self.taximeter.change_state(False)  # Llama a change_state
         else:
-            self.console_label.config(text=f"El viaje aún no se ha iniciado, llame a un taxi {RAISED_HAND}",bootstyle=(DANGER, INVERSE)) # Para controlar que no se mueve o se para sin haber iniciado la carrera
-        
+            self.console_label.config(text=f"El viaje aún no se ha iniciado, llame a un taxi {RAISED_HAND}", bootstyle=(DANGER, INVERSE))  # Para controlar que no se mueve o se para sin haber iniciado la carrera
 
     def stop_button_click(self):
         self.stop_btn.config(bootstyle="WARNING")  # Cambia el estilo del botón a verde
@@ -158,17 +205,22 @@ class App(ttk.Frame):
 
         if self.taximeter.ride.in_ride:
             self.taximeter.ride.finish_ride()  # Llama a change_state
-            total_cost =  self.taximeter.ride.calculate_cost() # Calcula el costo total de la carrera
-            self.console_label.config(text=f"{LOCATION_MARKER} Ha llegado a su destino.\n\nFinalizamos carrera. Coste total {round(total_cost, 2)}€",bootstyle=(SUCCESS, INVERSE))
+            total_cost = self.taximeter.ride.calculate_cost()  # Calcula el costo total de la carrera
+            self.console_label.config(text=f"{LOCATION_MARKER} Ha llegado a su destino.\n\nFinalizamos carrera. Coste total {round(total_cost, 2)}€", bootstyle=(SUCCESS, INVERSE))
         else:
-            self.console_label.config(text=f"\nNo estamos en carrera... llame a un taxi {RAISED_HAND}\n",bootstyle=(DANGER, INVERSE)) # Para controlar que no se mueve o se para sin haber iniciado la carrera
-
+            self.console_label.config(text=f"\nNo estamos en carrera... llame a un taxi {RAISED_HAND}\n", bootstyle=(DANGER, INVERSE))  # Para controlar que no se mueve o se para sin haber iniciado la carrera
                 
     def exit_button_click(self):
         print(f"\n{BRIGHT_GREEN}{BG_BLACK} {SMILE} Gracias por viajar con 4TAXIS, su taxímetro digital {STAR}{STAR}{STAR}{STAR}{STAR} {RESET}\n") 
         print(f"Saliendo del sistema... \n")
         self.master.destroy()  # Cierra la aplicación
 
+    def logs_button_click(self):
+        self.taximeter.show_rides_history()
+
+    def fares_button_click(self):
+        self.taximeter.update_fares()
+    
     def create_buttonbox(self):
         """Crear la caja de botones con controles"""
         container = ttk.Frame(self)
@@ -211,6 +263,25 @@ class App(ttk.Frame):
         )
         self.stop_btn.pack(side=LEFT, fill=X, expand=YES)          
 
+
+        self.logs_btn = ttk.Button(
+            master=container,
+            text=Emoji.get('open file folder'),
+            bootstyle=DARK,
+            padding=20,
+            command=self.logs_button_click,  # ver logs 
+        )
+        self.logs_btn.pack(side=LEFT, fill=X, expand=YES)   
+
+        self.fares_btn = ttk.Button(
+            master=container,
+            text=DOLLAR_BILL,
+            bootstyle=DARK,
+            padding=20,
+            command=self.fares_button_click,  # ver logs 
+        )
+        self.fares_btn.pack(side=LEFT, fill=X, expand=YES)  
+
         exit_btn = ttk.Button(
             master=container,
             text="\U0000274C",
@@ -218,7 +289,7 @@ class App(ttk.Frame):
             padding=20,
             command=self.exit_button_click,  # Salir
         )
-        exit_btn.pack(side=LEFT, fill=X, expand=YES)             
+        exit_btn.pack(side=LEFT, fill=X, expand=YES)         
 
 
 if __name__ == '__main__':

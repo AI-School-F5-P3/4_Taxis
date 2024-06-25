@@ -109,7 +109,10 @@ class App(ttk.Frame):
             self.stop_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
 
             if self.taximeter.ride.in_ride:
-                self.console_label.config(text=f"Aquí estoy ¿Nos vamos?.\n\nTaxímetro corriendo a {self.taximeter.fare.stop_fare}€ por segundo.",bootstyle=(INFO, INVERSE))
+                if self.taximeter.ride.in_movement:
+                    self.console_label.config(text=f"Ya estamos en carrera.\n\nTaxímetro corriendo a {self.taximeter.fare.movement_fare}€ por segundo.",bootstyle=(INFO, INVERSE))
+                else:
+                    self.console_label.config(text=f"Ya estamos en carrera.\n\nTaxímetro corriendo a {self.taximeter.fare.stop_fare}€ por segundo.",bootstyle=(INFO, INVERSE))
             else:
                 self.console_label.config(text=f"¡Hola! El taxi esta detenido.\n\nTaxímetro corriendo a {self.taximeter.fare.stop_fare}€ por segundo.",bootstyle=(INFO, INVERSE))
                 self.taximeter.start_ride()  # Llama a start_ride

@@ -30,14 +30,14 @@ class App(ttk.Frame):
 
     def __init__(self, master):
         super().__init__(master)
-        self.pack(fill=BOTH, expand=YES)
-        
-        self.taximeter = Taximeter()  # Instanciar la clase Taximeter
+        self.pack(fill=BOTH, expand=YES)     
 
         self.create_header()
         self.create_image()
         self.create_message_area()
         self.create_buttonbox()
+        
+        self.taximeter = Taximeter()  # Instanciar la clase Taximeter
 
     def create_header(self):
         """El encabezado de la aplicación"""

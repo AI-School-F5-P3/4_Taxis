@@ -24,26 +24,54 @@ Este proyecto representa un paso significativo hacia la modernización del servi
 ## Tabla de Contenidos
 
 - [Instalación](#instalación)
-- [Uso](#uso)
+- [Inicio](#inicio)
 - [Características](#características)
-
+- [Extras](#extras)
 - [Licencia](#licencia)
 
-## Instalación
+### 1. Instalación
 
-1. Clona el repositorio:
-   ```sh
-   git clone https://github.com/usuario/proyecto.git
+    Clona el repositorio:
+    ```sh
+    git clone https://github.com/AI-School-F5-P3/4_taxis.git
 
+### 2. Inicio
 
-
-### 2. Uso
-Proporciona ejemplos de cómo usar tu proyecto.
-
-```markdown
-## Uso
-
-Para iniciar la aplicación, usa el siguiente comando:
-```sh
 Puedes iniciar la 4TAXIS en la interfaz grafica desde app.py o en la linea de comandos desde taximeter.py
 
+### 3. Caracteristicas
+
+- **Bienvenida y Menú de Comandos: Ingo**
+    - Al iniciar el programa, se da la bienvenida y se muestra una lista de comandos, o una serie de botones, disponibles para el usuario.
+
+- **Inicio de Carrera: Luis**
+    - - Pulsando la tecla i o mediante el botón Hand de la interfaz gráfica.
+    - El programa empieza a calcular la tarifa y se asume que el taxi está inicialmente detenido.
+        
+- **Movimiento del Taxi:**
+    - Pulsando la tecla m o mediante el botón Play de la interfaz gráfica.
+    - El taxi se mueve y el programa cambia la tarifa a 5 céntimos por segundo. 
+        
+- **Pausa del Taxi:**
+    - Pulsando la tecla s o mediante el botón Pause de la interfaz gráfica.
+    - El taxi se ha detenido y el programa cambia la tarifa a 2 céntimos por segundo. 
+
+        
+- **Fin de Carrera:**
+    - Pulsando la tecla e o mediante el botón Stop de la interfaz gráfica.
+    - Finaliza el cálculo de la tarifa y muestra el total acumulado en Euros.
+
+
+- **Salir del Programa:**
+    - Pulsando la tecla e o mediante el botón Exit de la interfaz gráfica.
+    - Permite al usuario salir del programa de manera segura.
+
+### 4. Extras
+    - Al iniciar te pide la contraseña.
+    - El programa guarda en texto plano un registro histórico de carreras pasadas que se puede consultar.
+    - Los precios de la carrera se pueden configurar para adaptarse a la demanda actual.
+
+
+### 5. Licencia
+
+Puedes usarlo como quieras.

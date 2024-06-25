@@ -1,5 +1,15 @@
+import logging # Importamos este módulo, que proporciona una forma flexible de generar logs
 from fare import Fare
 from ride import Ride
+
+# Configurar el sistema de logging y establecer los parámetros
+logging.basicConfig(
+    level=logging.DEBUG, # Establece los niveles que se registrarán de mensajes, nivel DEBUG y superiores.
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', # Establece el formato de los mensajes de log
+    handlers=[
+        logging.FileHandler("logs/taximeter.log"), # Enviar los mensajes de log a un archivo lamado taximeter.log
+    ]
+)
 
 # Definición de colores, estilos e iconos
 BRIGHT_GREEN = "\033[92m"
@@ -26,9 +36,12 @@ class Taximeter:
         self.fare = Fare(0.02, 0.05)
         # Instanciamos la clase Ride pasándole el parámetro Tarifa
         self.ride = Ride(self.fare)
+        # Creamos un logger con el nombre de la clase actual, para identificar el origen de los mensajes de log
+        self.logger = logging.getLogger(self.__class__.__name__)
 
     # Method for the welcome message and command menu
     def command_menu(self):
+        self.logger.info("Mostrando el menú de comandos") 
         print(f"\n{BRIGHT_GREEN}{BG_BLACK} {TAXI} Bienvenido/a a 4TAXIS, su taxímetro digital {TAXI} {RESET}\n") 
         print(f" {ITALIC}Menú{RESET}\n")
         print(f"  'i' - {FLAG} Iniciar un nuevo viaje")
@@ -63,10 +76,13 @@ def main():
         elif command == "f":
             taximeter.end_ride()
         elif command == "e":
+            taximeter.logger.info("Exiting the system.")  # Log de información cuando se sale del sistema
             print(f"\n{BRIGHT_GREEN}{BG_BLACK} {SMILE} Gracias por viajar con 4TAXIS, su taxímetro digital {STAR}{STAR}{STAR}{STAR}{STAR} {RESET}\n") 
             print(f"Saliendo del sistema... \n")
             break
         else:
+            # Log de advertencia cuando se ingresa un comando no reconocido
+            taximeter.logger.warning(f"Unrecognized command: {command}")              
             print(f"{CELEBRATION} Unrecognized command. Please try again.")
             taximeter.command_menu()  # Show available commands again in case of an error
 

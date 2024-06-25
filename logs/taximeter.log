@@ -40,3 +40,36 @@
 2024-06-24 15:43:32,004 - Ride - DEBUG - Calculating cost: stop_cost=0.12515225887298584, movement_cost=0.0
 2024-06-24 15:43:32,005 - Ride - INFO - Ride finished. Total cost: 0.13ï¿½
 2024-06-24 15:43:59,904 - Taximeter - INFO - Exiting the system.
+2024-06-25 09:42:16,539 - Taximeter - INFO - Mostrando el menú de comandos
+2024-06-25 09:42:31,866 - Ride - INFO - Ride started. Taxi is stopped.
+2024-06-25 09:42:37,754 - Ride - INFO - Taxi in movement.
+2024-06-25 09:42:41,224 - Ride - INFO - Taxi stopped.
+2024-06-25 09:42:44,644 - Ride - INFO - Taxi in movement.
+2024-06-25 09:42:46,674 - Ride - INFO - Taxi stopped.
+2024-06-25 09:42:49,035 - Ride - DEBUG - Calculating cost: stop_cost=0.1861402940750122, movement_cost=0.27504962682724
+2024-06-25 09:42:49,035 - Ride - INFO - Ride finished. Total cost: 0.46€
+2024-06-25 09:43:16,917 - Taximeter - INFO - Exiting the system.
+2024-06-25 09:51:01,951 - Taximeter - INFO - Mostrando el menú de comandos
+2024-06-25 09:51:08,166 - Ride - INFO - Ride started. Taxi is stopped.
+2024-06-25 09:51:13,334 - Ride - INFO - Taxi in movement.
+2024-06-25 09:51:20,358 - Ride - INFO - Taxi stopped.
+2024-06-25 09:51:28,508 - Ride - INFO - Taxi in movement.
+2024-06-25 09:51:34,611 - Ride - WARNING - Attempt to start ride when it is already started.
+2024-06-25 09:51:38,701 - Ride - INFO - Taxi stopped.
+2024-06-25 09:51:57,777 - Ride - DEBUG - Calculating cost: stop_cost=0.26633864879608155, movement_cost=0.8608970046043396
+2024-06-25 09:51:57,777 - Ride - INFO - Ride finished. Total cost: 1.13€
+2024-06-25 09:52:37,147 - Taximeter - INFO - Exiting the system.
+2024-06-25 09:58:55,323 - Taximeter - INFO - Mostrando el menú de comandos
+2024-06-25 09:59:06,483 - Ride - INFO - Ride started. Taxi is stopped.
+2024-06-25 09:59:08,568 - Ride - INFO - Taxi in movement.
+2024-06-25 09:59:10,505 - Ride - INFO - Taxi stopped.
+2024-06-25 09:59:13,975 - Ride - INFO - Taxi in movement.
+2024-06-25 09:59:17,608 - Ride - DEBUG - Calculating cost: stop_cost=0.111076979637146, movement_cost=0.09686061143875123
+2024-06-25 09:59:17,608 - Ride - INFO - Ride finished. Total cost: 0.21€
+2024-06-25 09:59:26,845 - Taximeter - INFO - Exiting the system.
+2024-06-25 10:02:08,154 - Taximeter - INFO - Mostrando el menú de comandos
+2024-06-25 10:02:13,495 - Taximeter - INFO - Exiting the system.
+2024-06-25 10:11:02,032 - Taximeter - INFO - Mostrando el menú de comandos
+2024-06-25 10:15:48,589 - Taximeter - INFO - Exiting the system.
+2024-06-25 10:15:56,945 - Taximeter - INFO - Mostrando el menú de comandos
+2024-06-25 10:16:45,572 - Taximeter - INFO - Exiting the system.

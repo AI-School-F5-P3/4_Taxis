@@ -1,6 +1,13 @@
+import os
+import subprocess# Importar subprocces para ejecutar comandos del sistema, como abrir un archivo en el en el editor de texto predeterminado del sistema
+import sys # Para evitar problemas de compatibilidad
 import logging # Importamos este módulo, que proporciona una forma flexible de generar logs
 from fare import Fare
 from ride import Ride
+
+# Verificar y crear la carpeta 'logs' si no existe
+if not os.path.exists("logs"):
+    os.makedirs("logs")
 
 # Configurar el sistema de logging y establecer los parámetros
 logging.basicConfig(
@@ -27,6 +34,9 @@ LOCATION_MARKER = "\U0001F4CD"   # 📍
 CELEBRATION = "\U0001F389"       # 🎉
 SMILE = "\U0001F600"     # 😀
 THINKING = "\U0001F914"  # 🤔
+EYE = "\U0001F441"  # 👁️
+RED = "\033[31m"
+WHITE = "\033[37m"  # Definición del color blanco
 
 
 # Creamos la clase Taximetro en la que intanciaremos Tarifa y Carrera, y será en la que tendremos el menu de comandos del programa
@@ -48,6 +58,7 @@ class Taximeter:
         print(f"  'm' - {GREEN_CIRCLE} Indicar que el taxi está en movimiento")
         print(f"  's' - {RED_CIRCLE} Indicar que el taxi está detenido")        
         print(f"  'f' - {LOCATION_MARKER} Terminar el viaje y mostrar la tarifa total")
+        print(f"  'h' - {EYE}  Consultar el historial de viajes")
         print(f"  'e' - {CROSS_MARK} Salir del sistema\n")
        
     # Method to start a new ride
@@ -62,6 +73,28 @@ class Taximeter:
     def end_ride(self):
         self.ride.finish_ride()
 
+    # Method to show all the save rides    
+    def show_rides_history(self):        
+        log_file_path = os.path.abspath("logs/rides_history.txt")  # Ruta absoluta al archivo
+        try:
+            # Abrir el archivo "rides_history.txt" en modo lectura
+            with open("logs/rides_history.txt", "r") as file:
+                print(f"\n{EYE}{WHITE} Historial de carreras:{RESET}\n")
+                # Imprime el contenido del historial de carreras
+                print(file.read())
+
+            # Abrir el archivo en el editor de texto predeterminado del sistema
+            if sys.platform.startswith('win'):  # Comprobación para sistemas Windows
+                os.startfile(log_file_path )
+            elif sys.platform.startswith('linux') or sys.platform.startswith('darwin'):  # Comprobación para sistemas Unix/Linux/MacOS
+                subprocess.Popen(['xdg-open', log_file_path ])
+                
+        except FileNotFoundError:
+            # Si el archivo no existe, captura la excepción FileNotFoundError
+            # Imprime un mensaje indicando que no hay historial de carreras
+            print(f"\n{RED}{CROSS_MARK}Todavia no hay historial de carreras.{RESET}\n")
+
+
 def main():
     taximeter = Taximeter()
     taximeter.command_menu()
@@ -75,6 +108,8 @@ def main():
             taximeter.change_state(True)
         elif command == "f":
             taximeter.end_ride()
+        elif command == "h":
+            taximeter.show_rides_history()
         elif command == "e":
             taximeter.logger.info("Exiting the system.")  # Log de información cuando se sale del sistema
             print(f"\n{BRIGHT_GREEN}{BG_BLACK} {SMILE} Gracias por viajar con 4TAXIS, su taxímetro digital {STAR}{STAR}{STAR}{STAR}{STAR} {RESET}\n") 

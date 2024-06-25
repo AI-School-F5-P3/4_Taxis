@@ -2,6 +2,7 @@ import logging # Importamos este módulo, que proporciona una forma flexible de 
 from fare import Fare
 from ride import Ride
 
+
 # Configurar el sistema de logging y establecer los parámetros
 logging.basicConfig(
     level=logging.DEBUG, # Establece los niveles que se registrarán de mensajes, nivel DEBUG y superiores.
@@ -27,6 +28,7 @@ LOCATION_MARKER = "\U0001F4CD"   # 📍
 CELEBRATION = "\U0001F389"       # 🎉
 SMILE = "\U0001F600"     # 😀
 THINKING = "\U0001F914"  # 🤔
+LOCK = "\U0001F512"  # 🔒
 
 
 # Creamos la clase Taximetro en la que intanciaremos Tarifa y Carrera, y será en la que tendremos el menu de comandos del programa
@@ -38,6 +40,15 @@ class Taximeter:
         self.ride = Ride(self.fare)
         # Creamos un logger con el nombre de la clase actual, para identificar el origen de los mensajes de log
         self.logger = logging.getLogger(self.__class__.__name__)
+        self.correct_password ='4taxis'
+
+    def check_password(self, user_password):
+        if user_password.lower() == self.correct_password.lower():
+            print(f"{CELEBRATION}Acceso concedido{CELEBRATION}")
+            return True
+        else:
+            print(f"Contraseña incorrecta. La contraseña ingresada fue:'{user_password}'")
+            return False
 
     # Method for the welcome message and command menu
     def command_menu(self):
@@ -64,6 +75,11 @@ class Taximeter:
 
 def main():
     taximeter = Taximeter()
+    while True:
+        user_password = input(f"{LOCK} Ingrese la contraseña para desbloquear el sistema{LOCK}  ").strip()
+        if taximeter.check_password(user_password):
+            break
+        print("Contraseña incorrecta, por favor intentelo de nuevo")
     taximeter.command_menu()
     while True:
         command = input(f"Ingrese un comando:").strip().lower()
@@ -86,6 +102,5 @@ def main():
             print(f"{CELEBRATION} Unrecognized command. Please try again.")
             taximeter.command_menu()  # Show available commands again in case of an error
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
-

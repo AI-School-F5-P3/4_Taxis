@@ -1,5 +1,7 @@
 import logging  # Importamos el módulo logging para los logs
-import time #Importamos el modulo time para trabajar con tiempo
+import os
+import time # Importamos el modulo time para trabajar con tiempo
+import datetime  # Importa el módulo datetime para guardas la fecha de los registros de carreras
 from fare import Fare
 
 # Definición de colores, estilos e iconos
@@ -17,6 +19,7 @@ LOCATION_MARKER = "\U0001F4CD"   # 📍
 CRY = "\U0001F622"       # 😢
 CROSS_MARK = "\U0000274C"    # ❌
 FLAG = "\U0001F3C1"          # 🏁
+EYE = "\U0001F441"  # 👁️
 
 
 
@@ -101,8 +104,22 @@ class Ride:
             self.logger.info(f"Ride finished. Total cost: {round(total_cost, 2)}€")  # Log de información cuando la carrera termina
             print(f"{taxi_emoji} Finalizamos carrera. Coste total {round(total_cost, 2)}€")
             print(f"\n{MAGENTA}| {LOCATION_MARKER} - Ha llegado a su destino | {RESET} Finalizamos carrera. Coste total {round(total_cost, 2)}€\n")
-            print(f"\n{WHITE}| Pulsa 'i' para empezar una nueva carrera {FLAG}  o pulsa 'e' para salir del sistema {CROSS_MARK}|\n")
-            # return self.fare.total_cost  # Retorna el costo total de la carrera
+            print(f"\n{WHITE}| ¿Que quieres hacer a continuación? | {RESET}")
+            print(f"  'i' - {FLAG} Iniciar un nuevo viaje")
+            print(f"  'h' - {EYE}  Consultar el historial de viajes")
+            print(f"  'e' - {CROSS_MARK} Salir del sistema\n")
+            # return self.fare.total_cost  # Retorna el costo total de la carrera            
+
+            # Guardar los detalles de la carrera en un archivo de texto
+            # Asegurar que la carpeta 'logs' exista
+            # Verificar y crear la carpeta 'logs' si no existe
+            if not os.path.exists("logs"):
+                os.makedirs("logs")
+            # Modo "a" significa "append" (añadir). Abre el archivo para escritura y posiciona el puntero al final del archivo
+            with open("logs/rides_history.txt", "a") as file: # Asegurar que el archivo se cierre correctamente después de ser utilizado
+                file.write(f"Fecha: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                file.write(f"Carrera finalizada. Coste total: {round(total_cost, 2)}€\n")
+
             
          else:
             self.logger.warning("Attempt to finish ride when it has not started.")  # Log de advertencia cuando se intenta finalizar una carrera no iniciada

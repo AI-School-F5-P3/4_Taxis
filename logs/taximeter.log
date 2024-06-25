@@ -40,6 +40,7 @@
 2024-06-24 15:43:32,004 - Ride - DEBUG - Calculating cost: stop_cost=0.12515225887298584, movement_cost=0.0
 2024-06-24 15:43:32,005 - Ride - INFO - Ride finished. Total cost: 0.13ï¿½
 2024-06-24 15:43:59,904 - Taximeter - INFO - Exiting the system.
+<<<<<<< HEAD
 2024-06-25 10:37:44,335 - Taximeter - INFO - Mostrando el menú de comandos
 2024-06-25 10:39:42,032 - Taximeter - WARNING - Unrecognized command: & c:/users/samir/appdata/local/programs/python/python310/python.exe "c:/users/samir/practicas bootcamp f5/4_taxis/src/taximeter.py"
 2024-06-25 10:39:42,033 - Taximeter - INFO - Mostrando el menú de comandos
@@ -64,3 +65,13 @@
 2024-06-25 10:54:48,873 - Taximeter - INFO - Mostrando el menú de comandos
 2024-06-25 10:55:28,183 - Taximeter - INFO - Mostrando el menú de comandos
 2024-06-25 10:55:32,714 - Taximeter - INFO - Exiting the system.
+=======
+2024-06-25 11:05:40,820 - Taximeter - INFO - Mostrando el menÃº de comandos
+2024-06-25 11:06:04,723 - Taximeter - WARNING - Unrecognized command: 0.03
+2024-06-25 11:06:04,723 - Taximeter - INFO - Mostrando el menÃº de comandos
+2024-06-25 11:22:39,281 - Taximeter - INFO - Exiting the system.
+2024-06-25 11:25:43,407 - Taximeter - INFO - Mostrando el menÃº de comandos
+2024-06-25 11:25:52,125 - Taximeter - INFO - Exiting the system.
+2024-06-25 11:26:10,656 - Taximeter - INFO - Mostrando el menÃº de comandos
+2024-06-25 11:26:46,383 - Taximeter - INFO - Exiting the system.
+>>>>>>> customfare

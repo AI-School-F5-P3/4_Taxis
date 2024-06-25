@@ -42,20 +42,20 @@ LOCK = "\U0001F512"  # 🔒
 # Creamos la clase Taximetro en la que intanciaremos Tarifa y Carrera, y será en la que tendremos el menu de comandos del programa
 class Taximeter:
     def __init__(self):
-        # Preguntar al usuario si desea configurar tarifas personalizadas
-        user_input = input("¿Desea configurar tarifas personalizadas? (s/n): ").strip().lower()
-        if user_input == 's':
-            # Si el usuario dice sí, solicitar las tarifas personalizadas
-            try:
-                custom_stop_fare = float(input("Ingrese la tarifa por segundo cuando el taxi está detenido: "))
-                custom_movement_fare = float(input("Ingrese la tarifa por segundo cuando el taxi está en movimiento: "))
-                self.fare = Fare(custom_stop_fare, custom_movement_fare)
-            except ValueError:
-                print("Entrada inválida, se aplicarán las tarifas por defecto.")
-                self.fare = Fare(0.02, 0.05)  # Tarifas por defecto en caso de entrada inválida
-        else:
-            # Si el usuario dice no, usar las tarifas por defecto
-            self.fare = Fare(0.02, 0.05)
+        # # # Preguntar al usuario si desea configurar tarifas personalizadas
+        # # user_input = input("¿Desea configurar tarifas personalizadas? (s/n): ").strip().lower()
+        # # if user_input == 's':
+        # #     # Si el usuario dice sí, solicitar las tarifas personalizadas
+        # #     try:
+        # #         custom_stop_fare = float(input("Ingrese la tarifa por segundo cuando el taxi está detenido: "))
+        # #         custom_movement_fare = float(input("Ingrese la tarifa por segundo cuando el taxi está en movimiento: "))
+        # #         self.fare = Fare(custom_stop_fare, custom_movement_fare)
+        # #     except ValueError:
+        # #         print("Entrada inválida, se aplicarán las tarifas por defecto.")
+        self.fare = Fare(0.02, 0.05)  # Tarifas por defecto en caso de entrada inválida
+        # # else:
+        # #     # Si el usuario dice no, usar las tarifas por defecto
+        # #     self.fare = Fare(0.02, 0.05)
 
         self.ride = Ride(self.fare)
         # Creamos un logger con el nombre de la clase actual, para identificar el origen de los mensajes de log
@@ -134,10 +134,14 @@ class Taximeter:
 def main():
     taximeter = Taximeter()
     while True:
-        user_password = input(f"{LOCK} Ingrese la contraseña para desbloquear el sistema{LOCK}  ").strip()
-        if taximeter.check_password(user_password):
-            break
-        print("Contraseña incorrecta, por favor intentelo de nuevo")
+            user_password = input(f"{LOCK} Ingrese la contraseña para desbloquear el sistema{LOCK}  ").strip()
+            if user_password.lower() == "salir":  # Agrega esta línea para verificar si se ingresa "salir"
+                print("Saliendo del programa...")
+                exit()  # Sale completamente del programa
+            elif taximeter.check_password(user_password):
+                break
+            else:
+                print("Contraseña incorrecta, por favor inténtelo de nuevo")
     taximeter.command_menu()
     while True:
         command = input(f"Ingrese un comando:").strip().lower()

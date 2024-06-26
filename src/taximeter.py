@@ -100,6 +100,15 @@ class Taximeter:
             print(f"\n{BRIGHT_GREEN}Tarifas actualizadas correctamente!{RESET}")
         except ValueError:
             print(f"\n{RED_CIRCLE} Error: Por favor, introduzca un número válido.{RESET}")
+    
+    #Actualizar las tarifas desde la interfaz gráfica
+    def update_fares_ttk(self,custom_movement_fare,custom_stop_fare):
+        try:
+            self.fare.stop_fare = custom_stop_fare
+            self.fare.movement_fare = custom_movement_fare
+            print(f"\n{BRIGHT_GREEN}Tarifas actualizadas correctamente!{RESET}")
+        except ValueError:
+            print(f"\n{RED_CIRCLE} Error: Por favor, introduzca un número válido.{RESET}")
 
     # Method to change the state of the taxi (moving or stopped)
     def change_state(self, movement):

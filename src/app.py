@@ -4,6 +4,7 @@ from ttkbootstrap.constants import *
 from ttkbootstrap.icons import Emoji
 from PIL import Image, ImageTk
 from taximeter import Taximeter  # Importar la clase Taximeter
+from tkinter import Toplevel  # Importar Toplevel
 
 # Definición de colores e iconos
 BRIGHT_GREEN = "\033[92m"
@@ -54,7 +55,6 @@ class App(ttk.Frame):
         button_frame = ttk.Frame(self.password_frame)
         button_frame.pack(pady=15)
         
-        # cancel_button = ttk.Button(button_frame, text="Cancelar", bootstyle=SECONDARY, command=self.exit_button_click, width=15)
         cancel_button = ttk.Button(
             button_frame, 
             text="Cancelar", 
@@ -65,12 +65,8 @@ class App(ttk.Frame):
         )
         cancel_button.pack(side=LEFT, padx=5)
 
-
-
         submit_button = ttk.Button(button_frame, text="Enviar", bootstyle=SUCCESS, command=self.check_password,width=11,padding=(10, 5))
         submit_button.pack(side=LEFT, padx=5)
-
-        
 
     def check_password(self):
         """Verificar la contraseña ingresada"""
@@ -156,6 +152,8 @@ class App(ttk.Frame):
         self.pause_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a verde
         self.move_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
         self.stop_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
+        self.fares_btn.config(bootstyle="DARK")
+        self.logs_btn.config(bootstyle="DARK")
 
         if self.taximeter.ride.in_ride:
             if self.taximeter.ride.in_movement:
@@ -168,10 +166,12 @@ class App(ttk.Frame):
     
     def play_button_click(self):
         if self.taximeter.ride.in_ride:  # Si está en carrera
-            self.pause_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a verde
-            self.move_btn.config(bootstyle="SUCCESS")  # Cambia el estilo del botón a oscuro
-            self.start_btn.config(bootstyle="WARNING")  # Cambia el estilo del botón a amarillo
-            self.stop_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
+            self.pause_btn.config(bootstyle="DARK")  # Cambia el color del botón
+            self.move_btn.config(bootstyle="SUCCESS")
+            self.start_btn.config(bootstyle="WARNING")
+            self.stop_btn.config(bootstyle="DARK")
+            self.fares_btn.config(bootstyle="DARK")
+            self.logs_btn.config(bootstyle="DARK")
 
             if not self.taximeter.ride.in_movement:
                 self.console_label.config(text=f"¡Vámonos! Taxi en movimiento.\n\nTaxímetro corriendo a {self.taximeter.fare.movement_fare}€ por segundo.")
@@ -184,10 +184,12 @@ class App(ttk.Frame):
         
     def pause_button_click(self):      
         if self.taximeter.ride.in_ride:  # Si está en carrera
-            self.pause_btn.config(bootstyle="SUCCESS")  # Cambia el estilo del botón a verde
-            self.move_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
-            self.start_btn.config(bootstyle="WARNING")  # Cambia el estilo del botón a amarillo
-            self.stop_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
+            self.pause_btn.config(bootstyle="SUCCESS")  # Cambia el collor del botón
+            self.move_btn.config(bootstyle="DARK")
+            self.start_btn.config(bootstyle="WARNING") 
+            self.stop_btn.config(bootstyle="DARK")  
+            self.fares_btn.config(bootstyle="DARK")
+            self.logs_btn.config(bootstyle="DARK")
 
             if self.taximeter.ride.in_movement:
                 self.console_label.config(text=f"Nos detenemos. El taxi está parado.\n\nTaxímetro corriendo a {self.taximeter.fare.stop_fare}€ por segundo.")
@@ -198,10 +200,12 @@ class App(ttk.Frame):
             self.console_label.config(text=f"El viaje aún no se ha iniciado, llame a un taxi {RAISED_HAND}", bootstyle=(DANGER, INVERSE))  # Para controlar que no se mueve o se para sin haber iniciado la carrera
 
     def stop_button_click(self):
-        self.stop_btn.config(bootstyle="WARNING")  # Cambia el estilo del botón a verde
-        self.pause_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a verde
-        self.move_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a oscuro
-        self.start_btn.config(bootstyle="DARK")  # Cambia el estilo del botón a amarillo
+        self.stop_btn.config(bootstyle="WARNING")  # Cambia el color del botón 
+        self.pause_btn.config(bootstyle="DARK")  
+        self.move_btn.config(bootstyle="DARK")  
+        self.start_btn.config(bootstyle="DARK")
+        self.fares_btn.config(bootstyle="DARK")
+        self.logs_btn.config(bootstyle="DARK")
 
         if self.taximeter.ride.in_ride:
             self.taximeter.ride.finish_ride()  # Llama a change_state
@@ -216,11 +220,101 @@ class App(ttk.Frame):
         self.master.destroy()  # Cierra la aplicación
 
     def logs_button_click(self):
+        self.logs_btn.config(bootstyle="INFO")
+        self.fares_btn.config(bootstyle="DARK")
         self.taximeter.show_rides_history()
 
     def fares_button_click(self):
-        self.taximeter.update_fares()
-    
+        self.logs_btn.config(bootstyle="DARK")
+        self.fares_btn.config(bootstyle="INFO")
+        self.create_fares_window()
+
+    def create_fares_window(self):
+        """Crear una nueva ventana para actualizar las tarifas"""
+        self.fares_window = Toplevel(self)
+        self.fares_window.title("Actualizar Tarifas")
+
+        ttk.Label(self.fares_window, text="Tarifa por Movimiento:", padding=20).grid(row=0, column=0)
+        self.movement_fare_entry = ttk.Entry(self.fares_window)
+        self.movement_fare_entry.grid(row=0, column=1, padx=50, pady=0)
+        
+
+        ttk.Label(self.fares_window, text="Tarifa por Parada:", padding=20).grid(row=1, column=0)
+        self.stop_fare_entry = ttk.Entry(self.fares_window)
+        self.stop_fare_entry.grid(row=1, column=1, padx=50, pady=0)
+
+        # Crear un frame para centrar el botón
+        button_frame = ttk.Frame(self.fares_window, padding=20)
+        button_frame.grid(row=2, columnspan=2, pady=0)
+
+        # Definir estilos para los botones con diferentes colores
+        style = ttk.Style()
+        style.configure(
+            'Cancel.TButton',
+            font=("Helvetica", 11),
+            background='#CACFD4',  # Color de fondo para el botón Cancelar (gris)
+            relief="flat",
+            padding=(20, 10)
+        )
+        style.map(
+            'Cancel.TButton',
+            background=[('active', '#A9A9A9')]  # Color de fondo para el botón Cancelar al posicionarse (gris oscuro)
+        )
+
+        style.configure(
+            'Update.TButton',
+            font=("Helvetica", 11),
+            background='#04B473',  # Color de fondo para el botón Actualizar (verde lima)
+            relief="flat",
+            padding=(20, 10)
+        )
+        style.map(
+            'Update.TButton',
+            background=[('active', '#029C63')]  # Color de fondo para el botón Actualizar al posicionarse (verde oscuro)
+        )
+
+        cancel_button = ttk.Button(
+            button_frame, 
+            text="Cancelar", 
+            style='Cancel.TButton',  # Aplicar el estilo personalizado Cancel
+            command=self.cancel_fares,  # Cerrar la ventana de tarifas
+            width=8
+        )
+        cancel_button.pack(side=LEFT, padx=5)
+
+        update_button = ttk.Button(
+            button_frame, 
+            text="Actualizar", 
+            style='Update.TButton',  # Aplicar el estilo personalizado Update
+            command=self.update_fares, 
+            width=8
+        )
+        update_button.pack(side=LEFT, padx=5)
+
+    def cancel_fares(self):
+        self.fares_btn.config(bootstyle="DARK")
+        self.fares_window.destroy()
+
+    def update_fares(self):
+        """Actualizar las tarifas del taxímetro"""
+        try:
+            movement_fare = float(self.movement_fare_entry.get())
+            stop_fare = float(self.stop_fare_entry.get())
+            print("movement_fare_entry", self.movement_fare_entry.get())
+            print("stop_fare_entry", self.stop_fare_entry.get())
+
+            self.taximeter.update_fares_ttk(movement_fare, stop_fare)
+            self.fares_window.destroy()  # Cerrar la ventana de tarifas
+
+            self.fares_btn.config(bootstyle="DARK")
+            
+            self.console_label.config(text=f"Tarifas actualizadas:\n\n{self.taximeter.fare.movement_fare}€ en movimiento y {self.taximeter.fare.stop_fare}€ en pausa.", bootstyle=(INFO, INVERSE))
+        except ValueError:
+            self.console_label.config(text=f"\nError: Por favor, ingrese valores válidos.\n", bootstyle=(DANGER, INVERSE))
+
+
+
+
     def create_buttonbox(self):
         """Crear la caja de botones con controles"""
         container = ttk.Frame(self)

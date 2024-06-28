@@ -1,10 +1,23 @@
+# Importar Path para manipulación de rutas de archivos
 from pathlib import Path
+
+# Importar ttkbootstrap para estilos modernos de widgets tkinter
 import ttkbootstrap as ttk
+
+# Importar constantes de ttkbootstrap para estilos y configuraciones
 from ttkbootstrap.constants import *
+
+# Importar Emoji para usar iconos en la interfaz
 from ttkbootstrap.icons import Emoji
+
+# Importar PIL para manejo de imágenes
 from PIL import Image, ImageTk
-from taximeter import Taximeter  # Importar la clase Taximeter
-from tkinter import Toplevel  # Importar Toplevel
+
+# Importar la clase Taximeter, que contiene la lógica del taxímetro
+from taximeter import Taximeter
+
+# Importar Toplevel de tkinter para crear nuevas ventanas
+from tkinter import Toplevel
 
 # Definición de colores e iconos
 BRIGHT_GREEN = "\033[92m"
@@ -30,8 +43,59 @@ DOLLAR_BILL = "\U0001F4B5"    # 💵
 
 
 class App(ttk.Frame):
+    """
+    Clase principal de la aplicación que representa la ventana principal
+    de la interfaz gráfica de usuario (GUI) para el taxímetro digital.
+
+    Hereda de ttk.Frame y utiliza ttkbootstrap para mejorar la apariencia
+    de los widgets tkinter.
+
+    Métodos:
+        __init__(self, master):
+            Constructor de la clase. Inicializa el marco y crea la interfaz de autenticación.
+        create_password_interface(self):
+            Crea la interfaz de usuario para la autenticación mediante contraseña.
+        check_password(self):
+            Verifica la contraseña ingresada y muestra la interfaz principal si es correcta.
+        create_main_interface(self):
+            Crea la interfaz principal de la aplicación después de la autenticación.
+        create_header(self):
+            Crea el encabezado de la aplicación con un mensaje de bienvenida y las instrucciones.
+        create_image(self):
+            Carga y muestra una imagen de fondo en la aplicación.
+        create_message_area(self):
+            Crea el área de mensajes para mostrar información al usuario.
+        create_buttonbox(self):
+            Crea la caja de botones para interactuar con la aplicación.
+        start_button_click(self):
+            Maneja la acción del botón de inicio.
+        play_button_click(self):
+            Maneja la acción del botón de reproducción.
+        pause_button_click(self):
+            Maneja la acción del botón de pausa.
+        stop_button_click(self):
+            Maneja la acción del botón de detención.
+        logs_button_click(self):
+            Maneja la acción del botón para ver los registros.
+        fares_button_click(self):
+            Maneja la acción del botón para actualizar las tarifas.
+        exit_button_click(self):
+            Maneja la acción del botón para salir de la aplicación.
+        create_fares_window(self):
+            Crea una ventana para actualizar las tarifas del taxímetro.
+        cancel_fares(self):
+            Maneja la acción de cancelar la actualización de tarifas.
+        update_fares(self):
+            Actualiza las tarifas del taxímetro con los valores ingresados.
+    """
 
     def __init__(self, master):
+        """
+        Constructor de la clase. Inicializa el marco y crea la interfaz de autenticación.
+        
+        Args:
+            master (tk.Tk): La ventana principal de tkinter.
+        """
         super().__init__(master)
         self.pack(fill=BOTH, expand=YES)
         

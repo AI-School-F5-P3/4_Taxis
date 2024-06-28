@@ -41,23 +41,9 @@ LOCK = "\U0001F512"  # 🔒
 
 # Creamos la clase Taximetro en la que intanciaremos Tarifa y Carrera, y será en la que tendremos el menu de comandos del programa
 class Taximeter:
-    def __init__(self):
-        # # # Preguntar al usuario si desea configurar tarifas personalizadas
-        # # user_input = input("¿Desea configurar tarifas personalizadas? (s/n): ").strip().lower()
-        # # if user_input == 's':
-        # #     # Si el usuario dice sí, solicitar las tarifas personalizadas
-        # #     try:
-        # #         custom_stop_fare = float(input("Ingrese la tarifa por segundo cuando el taxi está detenido: "))
-        # #         custom_movement_fare = float(input("Ingrese la tarifa por segundo cuando el taxi está en movimiento: "))
-        # #         self.fare = Fare(custom_stop_fare, custom_movement_fare)
-        # #     except ValueError:
-        # #         print("Entrada inválida, se aplicarán las tarifas por defecto.")
-        self.fare = Fare(0.02, 0.05)  # Tarifas por defecto en caso de entrada inválida
-        # # else:
-        # #     # Si el usuario dice no, usar las tarifas por defecto
-        # #     self.fare = Fare(0.02, 0.05)
-
-        self.ride = Ride(self.fare)
+    def __init__(self):       
+        self.fare = Fare(0.02, 0.05)  # Tarifas por defecto en caso de entrada inválida       
+        self.ride = Ride(self.fare) # Pasamos el precio de las tarifas a la clase Ride
         # Creamos un logger con el nombre de la clase actual, para identificar el origen de los mensajes de log
         self.logger = logging.getLogger(self.__class__.__name__)
         self.correct_password ='4taxis'

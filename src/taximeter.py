@@ -41,30 +41,16 @@ LOCK = "\U0001F512"  # 🔒
 
 # Creamos la clase Taximetro en la que intanciaremos Tarifa y Carrera, y será en la que tendremos el menu de comandos del programa
 class Taximeter:
-    def __init__(self):
-        # Preguntar al usuario si desea configurar tarifas personalizadas
-        user_input = input("¿Desea configurar tarifas personalizadas? (s/n): ").strip().lower()
-        if user_input == 's':
-            # Si el usuario dice sí, solicitar las tarifas personalizadas
-            try:
-                custom_stop_fare = float(input("Ingrese la tarifa por segundo cuando el taxi está detenido: "))
-                custom_movement_fare = float(input("Ingrese la tarifa por segundo cuando el taxi está en movimiento: "))
-                self.fare = Fare(custom_stop_fare, custom_movement_fare)
-            except ValueError:
-                print("Entrada inválida, se aplicarán las tarifas por defecto.")
-                self.fare = Fare(0.02, 0.05)  # Tarifas por defecto en caso de entrada inválida
-        else:
-            # Si el usuario dice no, usar las tarifas por defecto
-            self.fare = Fare(0.02, 0.05)
-
-        self.ride = Ride(self.fare)
+    def __init__(self):       
+        self.fare = Fare(0.02, 0.05)  # Tarifas por defecto en caso de entrada inválida       
+        self.ride = Ride(self.fare) # Pasamos el precio de las tarifas a la clase Ride
         # Creamos un logger con el nombre de la clase actual, para identificar el origen de los mensajes de log
         self.logger = logging.getLogger(self.__class__.__name__)
         self.correct_password ='4taxis'
 
     def check_password(self, user_password):
         if user_password.lower() == self.correct_password.lower():
-            print(f"{CELEBRATION}Acceso concedido{CELEBRATION}")
+            print(f"{CELEBRATION} Acceso concedido {CELEBRATION}")
             return True
         else:
             print(f"Contraseña incorrecta. La contraseña ingresada fue:'{user_password}'")
@@ -97,7 +83,16 @@ class Taximeter:
             custom_movement_fare = float(input("Ingrese la tarifa por segundo cuando el taxi está en movimiento: "))
             self.fare.stop_fare = custom_stop_fare
             self.fare.movement_fare = custom_movement_fare
-            print(f"\n{BRIGHT_GREEN}Tarifas actualizadas correctamente!{RESET}")
+            print(f"\n{BRIGHT_GREEN}Tarifas actualizadas correctamente!{RESET} {custom_movement_fare}€ en movimiento y {custom_stop_fare}€ en pausa.")
+        except ValueError:
+            print(f"\n{RED_CIRCLE} Error: Por favor, introduzca un número válido.{RESET}")
+    
+    #Actualizar las tarifas desde la interfaz gráfica
+    def update_fares_ttk(self,custom_movement_fare,custom_stop_fare):
+        try:
+            self.fare.stop_fare = custom_stop_fare
+            self.fare.movement_fare = custom_movement_fare
+            print(f"\n{BRIGHT_GREEN}Tarifas actualizadas correctamente!{RESET} {custom_movement_fare}€ en movimiento y {custom_stop_fare}€ en pausa.")
         except ValueError:
             print(f"\n{RED_CIRCLE} Error: Por favor, introduzca un número válido.{RESET}")
 
@@ -134,10 +129,14 @@ class Taximeter:
 def main():
     taximeter = Taximeter()
     while True:
-        user_password = input(f"{LOCK} Ingrese la contraseña para desbloquear el sistema{LOCK}  ").strip()
-        if taximeter.check_password(user_password):
-            break
-        print("Contraseña incorrecta, por favor intentelo de nuevo")
+            user_password = input(f"{LOCK} Ingrese la contraseña para desbloquear el sistema{LOCK}  ").strip()
+            if user_password.lower() == "salir":  # Agrega esta línea para verificar si se ingresa "salir"
+                print("Saliendo del programa...")
+                exit()  # Sale completamente del programa
+            elif taximeter.check_password(user_password):
+                break
+            else:
+                print("Contraseña incorrecta, por favor inténtelo de nuevo")
     taximeter.command_menu()
     while True:
         command = input(f"Ingrese un comando:").strip().lower()

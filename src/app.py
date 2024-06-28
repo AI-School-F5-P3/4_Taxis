@@ -222,7 +222,9 @@ class App(ttk.Frame):
     def logs_button_click(self):
         self.logs_btn.config(bootstyle="INFO")
         self.fares_btn.config(bootstyle="DARK")
+        self.stop_btn.config(bootstyle="DARK")
         self.taximeter.show_rides_history()
+        self.console_label.config(text=f"\nHistorial de carreras abierto\n", bootstyle=(INFO, INVERSE))
 
     def fares_button_click(self):
         self.logs_btn.config(bootstyle="DARK")
@@ -300,15 +302,13 @@ class App(ttk.Frame):
         try:
             movement_fare = float(self.movement_fare_entry.get())
             stop_fare = float(self.stop_fare_entry.get())
-            print("movement_fare_entry", self.movement_fare_entry.get())
-            print("stop_fare_entry", self.stop_fare_entry.get())
 
             self.taximeter.update_fares_ttk(movement_fare, stop_fare)
             self.fares_window.destroy()  # Cerrar la ventana de tarifas
 
             self.fares_btn.config(bootstyle="DARK")
-            
-            self.console_label.config(text=f"Tarifas actualizadas:\n\n{self.taximeter.fare.movement_fare}€ en movimiento y {self.taximeter.fare.stop_fare}€ en pausa.", bootstyle=(INFO, INVERSE))
+
+            self.console_label.config(text=f"Tarifas actualizadas:\n\n{movement_fare}€ en movimiento y {stop_fare}€ en pausa.", bootstyle=(INFO, INVERSE))
         except ValueError:
             self.console_label.config(text=f"\nError: Por favor, ingrese valores válidos.\n", bootstyle=(DANGER, INVERSE))
 

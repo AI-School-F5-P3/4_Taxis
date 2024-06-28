@@ -83,7 +83,7 @@ class Taximeter:
             custom_movement_fare = float(input("Ingrese la tarifa por segundo cuando el taxi está en movimiento: "))
             self.fare.stop_fare = custom_stop_fare
             self.fare.movement_fare = custom_movement_fare
-            print(f"\n{BRIGHT_GREEN}Tarifas actualizadas correctamente!{RESET}")
+            print(f"\n{BRIGHT_GREEN}Tarifas actualizadas correctamente!{RESET} {custom_movement_fare}€ en movimiento y {custom_stop_fare}€ en pausa.")
         except ValueError:
             print(f"\n{RED_CIRCLE} Error: Por favor, introduzca un número válido.{RESET}")
     
@@ -92,7 +92,7 @@ class Taximeter:
         try:
             self.fare.stop_fare = custom_stop_fare
             self.fare.movement_fare = custom_movement_fare
-            print(f"\n{BRIGHT_GREEN}Tarifas actualizadas correctamente!{RESET}")
+            print(f"\n{BRIGHT_GREEN}Tarifas actualizadas correctamente!{RESET} {custom_movement_fare}€ en movimiento y {custom_stop_fare}€ en pausa.")
         except ValueError:
             print(f"\n{RED_CIRCLE} Error: Por favor, introduzca un número válido.{RESET}")
 

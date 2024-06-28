@@ -34,6 +34,10 @@ Este proyecto representa un paso significativo hacia la modernización del servi
 
     git clone https://github.com/AI-School-F5-P3/4_taxis.git
 
+Navegamos hasta el directorio principal y ejecutamos el siguiente comando para descargar las dependencias
+
+    pip install -r requirements.txt     
+
 
 ### 2. Inicio
 

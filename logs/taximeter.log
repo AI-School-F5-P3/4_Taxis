@@ -64,3 +64,11 @@
 2024-06-25 10:54:48,873 - Taximeter - INFO - Mostrando el menú de comandos
 2024-06-25 10:55:28,183 - Taximeter - INFO - Mostrando el menú de comandos
 2024-06-25 10:55:32,714 - Taximeter - INFO - Exiting the system.
+2024-06-25 11:04:57,888 - Taximeter - INFO - Mostrando el menú de comandos
+2024-06-25 11:05:00,386 - Taximeter - INFO - Exiting the system.
+2024-06-25 11:27:50,885 - Taximeter - INFO - Mostrando el menú de comandos
+2024-06-25 11:28:55,612 - Taximeter - WARNING - Unrecognized command: & c:/users/samir/appdata/local/programs/python/python310/python.exe "c:/users/samir/practicas bootcamp f5/4_taxis/src/taximeter.py"
+2024-06-25 11:28:55,612 - Taximeter - INFO - Mostrando el menú de comandos
+2024-06-25 11:28:59,330 - Taximeter - INFO - Exiting the system.
+2024-06-25 11:29:47,245 - Taximeter - INFO - Mostrando el menú de comandos
+2024-06-25 11:29:56,997 - Taximeter - INFO - Exiting the system.

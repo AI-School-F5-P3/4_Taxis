@@ -4,7 +4,7 @@ import time # Importamos el modulo time para trabajar con tiempo
 import datetime  # Importa el módulo datetime para guardas la fecha de los registros de carreras
 from fare import Fare
 
-# Definición de colores, estilos e iconos
+# Definición de colores, estilos e iconos - UNICODE
 GREEN = "\033[32m"
 MAGENTA = "\033[35m"
 RESET = "\033[0m"
@@ -49,7 +49,7 @@ class Ride:
     # Método para iniciar Carrera (que incluye que el programa se mantenga a la espera     
 
     def start(self):
-        if not self.in_ride:
+        if not self.in_ride: # Igual que if self.in_ride == False
             self.in_ride = True
             self.in_movement = False
             self.time_stopped = 0 # Tiempo parado
@@ -91,13 +91,19 @@ class Ride:
         else:
             self.logger.error("Attempt to change state when ride has not started.")  # Log de error cuando se intenta cambiar el estado sin iniciar la carrera
             print(f"\n{RED}| {CRY} - El viaje aún no se ha iniciado | {RESET} \n") # Para controlar que no se mueve o se para sin haber iniciado la carrera
-    
-    # OPCIONAL MÉTODOS PARA STOP, SEMÁFORO Y ATASCO
 
 
     # Método para finalizar la carrera
     def finish_ride(self):
          if self.in_ride:
+            current_time = time.time()  # Guardar el tiempo actual en el momento de terminar la carrera
+
+            # Verificar si el taxi estaba en movimiento o detenido al terminar la carrera, y le suma el tiempo del útlimo cambio
+            if self.in_movement:
+                self.time_in_movement += current_time - self.last_change 
+            else:
+                self.time_stopped += current_time - self.last_change
+
             self.in_ride = False  # Finaliza la carrera
             total_cost =  self.calculate_cost() # Calcula el costo total de la carrera
             taxi_emoji = "\U0001F695"
@@ -107,8 +113,7 @@ class Ride:
             print(f"\n{WHITE}| ¿Que quieres hacer a continuación? | {RESET}")
             print(f"  'i' - {FLAG} Iniciar un nuevo viaje")
             print(f"  'h' - {EYE}  Consultar el historial de viajes")
-            print(f"  'e' - {CROSS_MARK} Salir del sistema\n")
-            # return self.fare.total_cost  # Retorna el costo total de la carrera            
+            print(f"  'e' - {CROSS_MARK} Salir del sistema\n")           
 
             # Guardar los detalles de la carrera en un archivo de texto
             # Asegurar que la carpeta 'logs' exista

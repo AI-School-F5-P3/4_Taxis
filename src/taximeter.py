@@ -48,13 +48,15 @@ class Taximeter:
         self.logger = logging.getLogger(self.__class__.__name__)
         self.correct_password ='4taxis'
 
-    def check_password(self, user_password):
+    def check_password(self, user_password):# Definición de la función 'check_password'
+                                            # Comprueba si la contraseña introducida por el usuario, convertida a minúsculas
+                                            # es igual a la contraseña correcta almacenada en el objeto, también convertida a minúsculas.
         if user_password.lower() == self.correct_password.lower():
-            print(f"{CELEBRATION} Acceso concedido {CELEBRATION}")
-            return True
+            print(f"{CELEBRATION}Acceso concedido{CELEBRATION}")
+            return True 
         else:
             print(f"Contraseña incorrecta. La contraseña ingresada fue:'{user_password}'")
-            return False
+            return False # Si la contraseña no es correcta, imprime un mensaje de error indicando la contraseña que se introdujo y devuelve False.
           
         # Instanciamos para que el user pueda cambiar la tarifa
        
@@ -128,14 +130,15 @@ class Taximeter:
 
 def main():
     taximeter = Taximeter()
-    while True:
+    while True: # bucle infinito que Solicita al usuario que ingrese una contraseña. 
+                #La función 'strip()' se utiliza para eliminar los espacios en blanco al principio y al final.
             user_password = input(f"{LOCK} Ingrese la contraseña para desbloquear el sistema{LOCK}  ").strip()
-            if user_password.lower() == "salir":  # Agrega esta línea para verificar si se ingresa "salir"
+            if user_password.lower() == "salir":  # definimos variable de escape
                 print("Saliendo del programa...")
                 exit()  # Sale completamente del programa
             elif taximeter.check_password(user_password):
-                break
-            else:
+                break  # Si la contraseña es correcta, se rompe el bucle infinito con 'break'
+            else: # Si la contraseña no es correcta, se imprime un mensaje de error y el bucle continúa
                 print("Contraseña incorrecta, por favor inténtelo de nuevo")
     taximeter.command_menu()
     while True:

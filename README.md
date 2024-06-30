@@ -44,7 +44,7 @@ Lo activamos
 
 Ejecutamos el siguiente comando para descargar las dependencias
 
-    pip install -r requirements.txt     
+    uv pip install -r requirements.txt     
 
 
 ### 2. Inicio
